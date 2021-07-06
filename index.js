@@ -60,7 +60,7 @@ app.use("/uploads", express.static("uploads"));
 
 // app.use("/admin/", userRoute);
 app.get("/", (req, res) => {
-    res.status(200).json({message: "Bienvenue..."})
+    res.status(200).json({message: "Bienvenue sur terre..."})
 })
 
 app.use((req, res, next) => {
