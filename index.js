@@ -4,8 +4,9 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 // Importation des routes
-// const equipeRoute = require("./api/routers/equipes");
-// const joueurRoute = require("./api/routers/joueurs");
+const userRoute = require("./api/routers/auth");
+const adresseRoute = require("./api/routers/adresse");
+const shopRoute = require("./api/routers/shop");
 // const competitionRoute = require("./api/routers/competitions");
 // const entraineurRoute = require("./api/routers/entraineur");
 // const arbitreRoute = require("./api/routers/arbitres");
@@ -13,7 +14,7 @@ const mongoose = require("mongoose");
 // const stadeRoute = require("./api/routers/stades");
 // const participantRoute = require("./api/routers/participants");
 
-// const userRoute = require("./api/routers/auth");
+
 
 // Dotenv config
 dotenv.config();
@@ -29,7 +30,6 @@ mongoose.connect(
   () => console.log("Connexion a la base de donnees reussie")
 );
 
-const TEST = process.env.TEST || "test pas OK";
 
 // Middleware
 
@@ -49,8 +49,15 @@ app.use((req, res, next) => {
 });
 app.use("/uploads", express.static("uploads"));
 
-// app.use("/equipes/", equipeRoute);
-// app.use("/joueurs/", joueurRoute);
+app.get("/", (req, res) => {
+  res.status(200).json({message: "Bienvenue..."})
+})
+
+
+app.use("/auth/", userRoute);
+
+app.use("/adresse", adresseRoute);
+app.use("/shop", shopRoute);
 // app.use("/comp/", competitionRoute);
 // app.use("/entraineurs", entraineurRoute);
 // app.use("/arbitres", arbitreRoute);
@@ -58,10 +65,8 @@ app.use("/uploads", express.static("uploads"));
 // app.use("/stades", stadeRoute);
 // app.use("/participants", participantRoute);
 
-// app.use("/admin/", userRoute);
-app.get("/", (req, res) => {
-    res.status(200).json({message: "Bienvenue sur terre..."})
-})
+
+
 
 app.use((req, res, next) => {
   const error = new Error("Route non définie");
@@ -81,5 +86,5 @@ app.use((error, req, res, next) => {
 // listening port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Mon serveur node tourne sur le port ${PORT}, ${TEST}`);
+  console.log(`Mon serveur node tourne sur le port ${PORT}`);
 });
