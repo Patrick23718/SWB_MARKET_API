@@ -8,46 +8,51 @@ const ProductSchema = mongoose.Schema({
         max: 50
     },
 
-    images: [{type: String}],
+    is_visible: {
+        type: Boolean,
+        required: false,
+        default: true
+    },
 
-    // brand: {
-    //     type: String,
-    //     required: true,
-    //     max: 50
-    // },
+    images: [String],
 
-    // shop: {
-    //     type: String,
-    //     required: true,
-    //     max: 50
-    // },
+    brand: {
+        type: String,
+        required: true,
+        max: 50
+    },
 
-    // Description: {
-    //     type: String,
-    //     required: false,
-    //     min: 150
-    // },
+    shop: {
+        type: mongoose.Types.ObjectId,
+        ref: "shop",
+        required: true
+    },
 
-    // prix: {
-    //     type: Number,
-    //     required: true,
-    // },
+    description: {
+        type: String,
+        required: true,
+        min: 150
+    },
 
-    // qte: {
-    //     type: Number,
-    //     required: true,
-    // },
+    prix: {
+        type: Number,
+        required: true,
+    },
 
-    // category: {
-    //     type: String,
-    //     required: true,
-    // },
+    qte: {
+        type: Number,
+        required: true,
+    },
 
-    // created_at: {
-    //     type: Date,
-    // },
+    category: {
+        type: mongoose.Types.ObjectId,
+        ref: "categorie",
+        required: true
+    },
 
-})
+},
+{timestamps: true}
+)
 
 const Product = mongoose.model('produit', ProductSchema)
 
