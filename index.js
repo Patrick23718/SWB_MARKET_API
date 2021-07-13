@@ -3,12 +3,13 @@ const app = express();
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
+
 // Importation des routes
 const userRoute = require("./api/routers/auth");
 const adresseRoute = require("./api/routers/adresse");
 const shopRoute = require("./api/routers/shop");
-// const competitionRoute = require("./api/routers/competitions");
-// const entraineurRoute = require("./api/routers/entraineur");
+const categoryRoute = require("./api/routers/category");
+const productRoute = require("./api/routers/product");
 // const arbitreRoute = require("./api/routers/arbitres");
 // const saisonRoute = require("./api/routers/saisons");
 // const stadeRoute = require("./api/routers/stades");
@@ -26,6 +27,7 @@ mongoose.connect(
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
+    useFindAndModify: false,
   },
   () => console.log("Connexion a la base de donnees reussie")
 );
@@ -49,6 +51,7 @@ app.use((req, res, next) => {
 });
 app.use("/uploads", express.static("uploads"));
 
+
 app.get("/", (req, res) => {
   res.status(200).json({message: "Bienvenue..."})
 })
@@ -58,8 +61,8 @@ app.use("/auth/", userRoute);
 
 app.use("/adresse", adresseRoute);
 app.use("/shop", shopRoute);
-// app.use("/comp/", competitionRoute);
-// app.use("/entraineurs", entraineurRoute);
+app.use("/categorie/", categoryRoute);
+app.use("/produit", productRoute);
 // app.use("/arbitres", arbitreRoute);
 // app.use("/saisons", saisonRoute);
 // app.use("/stades", stadeRoute);
