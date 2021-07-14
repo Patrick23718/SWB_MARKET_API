@@ -166,41 +166,41 @@ exports.remove_image = (req, res) => {
     
 }
 
-exports.add_image = (req, res) => {
-    const id = req.params.id;
-    if(id.length != 24) return res.status(400).send('Identifiant invalide')
+// exports.add_image = (req, res) => {
+//     const id = req.params.id;
+//     if(id.length != 24) return res.status(400).send('Identifiant invalide')
 
-    Product.findOneAndUpdate({_id: id}, { $push: { images: req.file.path} }).exec().then(doc => {
-        if (!doc)
-        return res.status(404).json({
-          message: "Oups!! aucune information pour l'identifiant fourni",
-        });
+//     Product.findOneAndUpdate({_id: id}, { $push: { images: req.file.path} }).exec().then(doc => {
+//         if (!doc)
+//         return res.status(404).json({
+//           message: "Oups!! aucune information pour l'identifiant fourni",
+//         });
 
-        // var dir = path.dirname(require.main.filename || process.mainModule.filename)
-        // var imagePath = dir + '\\' + req.body.image;
-        //     console.log(imagePath);
-        //     fs.unlink(imagePath, function (err) {
-        //         if (err) console.log(err);
-        //         // if no error, file has been deleted successfully
-        //         console.log('File deleted!');
-        //     });
-      res.status(200).json({
-        message: "Mise à jour reussie",
-        data: doc,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        message: "Oups!! une erreur est survenue",
-        error: err,
-      });
-    });
+//         // var dir = path.dirname(require.main.filename || process.mainModule.filename)
+//         // var imagePath = dir + '\\' + req.body.image;
+//         //     console.log(imagePath);
+//         //     fs.unlink(imagePath, function (err) {
+//         //         if (err) console.log(err);
+//         //         // if no error, file has been deleted successfully
+//         //         console.log('File deleted!');
+//         //     });
+//       res.status(200).json({
+//         message: "Mise à jour reussie",
+//         data: doc,
+//       });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.status(500).json({
+//         message: "Oups!! une erreur est survenue",
+//         error: err,
+//       });
+//     });
     
-    // console.log("remove")
-    // images.push(element.path)
+//     // console.log("remove")
+//     // images.push(element.path)
     
-}
+// }
 
 
 exports.update_product = (req, res) => {
